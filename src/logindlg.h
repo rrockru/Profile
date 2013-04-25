@@ -2,6 +2,7 @@
 #define LOGINWINDOW_H
 
 #include <QDialog>
+#include <QtSql>
 
 class LoginDlg : public QDialog
 {
@@ -14,6 +15,10 @@ signals:
 private slots:
     void OnOkButton();
     void OnCancelButton();
+
+private:
+    QComboBox *login;
+    QLineEdit *password;
 };
 
 #endif // LOGINWINDOW_H

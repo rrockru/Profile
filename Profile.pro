@@ -1,7 +1,5 @@
 PRECOMPILED_HEADER = src/stdafx.h
 
-CONFIG += debug
-
 QT += widgets sql
 
 win32 {
@@ -10,12 +8,14 @@ win32 {
 
 HEADERS = \
     src/mainwindow.h \
-    src/logindlg.h
+    src/logindlg.h \
+    src/settings.h
 
 SOURCES = \
     src/main.cpp \
     src/mainwindow.cpp \
-    src/logindlg.cpp
+    src/logindlg.cpp \
+    src/settings.cpp
 
 OTHER_FILES += \
     misc/win32/resource.rc \

@@ -6,8 +6,17 @@ LoginDlg::LoginDlg(QWidget *parent) :
 {
     QVBoxLayout *vbox = new QVBoxLayout;
 
-    QComboBox *login = new QComboBox(this);
-    QLineEdit *password = new QLineEdit(this);
+    QStringList logins;
+
+    QSqlQuery query("SELECT login FROM users");
+    while (query.next()) {
+        logins << query.value(0).toString();
+    }
+
+    login = new QComboBox(this);
+    login->addItems(logins);
+
+    password = new QLineEdit(this);
     QLabel *loginLabel = new QLabel(tr("Login:"), this);
     QLabel *passwordLabel = new QLabel(tr("Password:"), this);
 
@@ -26,11 +35,20 @@ LoginDlg::LoginDlg(QWidget *parent) :
     vbox->addLayout(buttons);
 
     setLayout(vbox);
+
+    password->setFocus();
 }
 
 void LoginDlg::OnOkButton()
 {
-    done(true);
+    QString q = QString("SELECT * FROM users WHERE login='%1' AND password='%2';").arg(login->currentText(), password->text());
+    QSqlQuery query(q);
+    if(query.numRowsAffected())
+        done(true);
+    else
+    {
+        QMessageBox::critical(this, tr("Error!"), tr("Invalid password!"));
+    }
 }
 
 void LoginDlg::OnCancelButton()

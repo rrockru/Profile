@@ -7,11 +7,11 @@
 # Ignore build files.
 /debug
 /release
-
 # Ignore some pjoject files.
 /Makefile
 /Makefile.Debug
 /Makefile.Release
-
 # Ignore machine-specific files.
 /Profile.pro.user
+/vc100.pdb
+/vc110.pdb
