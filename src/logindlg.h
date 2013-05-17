@@ -1,14 +1,13 @@
 #ifndef LOGINWINDOW_H
 #define LOGINWINDOW_H
 
-#include <QDialog>
-#include <QtSql>
+#include "controls.h"
 
 class LoginDlg : public QDialog
 {
     Q_OBJECT
 public:
-    explicit LoginDlg(QWidget *parent = 0);
+    explicit LoginDlg(Controls *controls, QWidget *parent = 0);
     
 signals:
 
@@ -17,6 +16,8 @@ private slots:
     void OnCancelButton();
 
 private:
+    Controls *_controls;
+
     QComboBox *login;
     QLineEdit *password;
 };

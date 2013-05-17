@@ -1,15 +1,14 @@
 #include "stdafx.h"
-#include "mainwindow.h"
+#include "controls.h"
 #include "logindlg.h"
+#include "mainwindow.h"
 #include "settings.h"
-
-#include <QtSql>
 
 int main(int argc, char **argv)
 {
     QApplication application(argc, argv);
-    application.setApplicationName("Quest Soft Player");
-    application.setApplicationVersion("5.0.0");
+    application.setApplicationName("Profile");
+    application.setApplicationVersion("1.0.0");
 
     QString configFile = QApplication::applicationDirPath() + QDir::separator() + "profile.ini";
 
@@ -27,10 +26,12 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    LoginDlg *loginDlg = new LoginDlg();
+    Controls *controls = new Controls(db);
+
+    LoginDlg *loginDlg = new LoginDlg(controls);
     if(loginDlg->exec())
     {
-        MainWindow *window = new MainWindow();
+        MainWindow *window = new MainWindow(controls);
         window->show();
 
         return application.exec();

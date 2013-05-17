@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #include "logindlg.h"
 
-LoginDlg::LoginDlg(QWidget *parent) :
+LoginDlg::LoginDlg(Controls *controls, QWidget *parent) :
     QDialog(parent)
 {
+    _controls = controls;
+
     QVBoxLayout *vbox = new QVBoxLayout;
 
     QStringList logins;
@@ -17,6 +19,8 @@ LoginDlg::LoginDlg(QWidget *parent) :
     login->addItems(logins);
 
     password = new QLineEdit(this);
+    password->setEchoMode(QLineEdit::Password);
+
     QLabel *loginLabel = new QLabel(tr("Login:"), this);
     QLabel *passwordLabel = new QLabel(tr("Password:"), this);
 
