@@ -7,17 +7,23 @@ win32 {
 }
 
 HEADERS = \
-    src/mainwindow.h \
     src/logindlg.h \
-    src/settings.h
+    src/settings.h \
+    src/controls.h \
+    src/stdafx.h \
+    src/mainwindow.h
 
 SOURCES = \
     src/main.cpp \
-    src/mainwindow.cpp \
     src/logindlg.cpp \
-    src/settings.cpp
+    src/settings.cpp \
+    src/controls.cpp \
+    src/mainwindow.cpp
 
 OTHER_FILES += \
     misc/win32/resource.rc \
     misc/icons/logo.jpg \
     misc/icons/logo.ico
+
+FORMS += \
+    src/mainwindow.ui

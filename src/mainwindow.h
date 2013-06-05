@@ -1,27 +1,31 @@
-#ifndef _MAIN_WINDOW_H_
-#define _MAIN_WINDOW_H_
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
+#include <QMainWindow>
 #include "controls.h"
+
+namespace Ui {
+class MainWindow;
+}
 
 class MainWindow : public QMainWindow
 {
-	Q_OBJECT
-
+    Q_OBJECT
+    
 public:
-    MainWindow(Controls* controls);
-	~MainWindow();
-	
+    explicit MainWindow(Controls *controls, QWidget *parent = 0);
+    ~MainWindow();
+
 protected:
     void closeEvent(QCloseEvent *event);
-
+    
 private:
+    Ui::MainWindow *ui;
+
     Controls *_controls;
 
-	QString _configFile;
-	QString _sqlServer;
-	
-	void LoadSettings();
-	void SaveSettings();
+    void LoadSettings();
+    void SaveSettings();
 };
 
-#endif // _MAIN_WINDOW_H_
+#endif // MAINWINDOW_H

@@ -1,28 +1,27 @@
-#include "stdafx.h"
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 
-MainWindow::MainWindow(Controls* controls) : QMainWindow()
+MainWindow::MainWindow(Controls *controls, QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
 {
     _controls = controls;
 
-	setMinimumSize(QSize(300, 200));
-	resize(850, 650);
+    ui->setupUi(this);
 
-    QMenu *file_menu = menuBar()->addMenu(tr("&File"));
-    file_menu->addAction(tr("&Exit"), this, SLOT(close()));
+    QSqlQueryModel *model = new QSqlQueryModel;
+    model->setQuery("SELECT name,enterprise,vacancy FROM ""profiles""");
+    model->setHeaderData(0, Qt::Horizontal, tr("ФИО"));
+    model->setHeaderData(1, Qt::Horizontal, tr("Предприятие"));
+    model->setHeaderData(2, Qt::Horizontal, tr("Вакансия"));
 
-    QMenu *tables_menu = menuBar()->addMenu(tr("&Tables"));
-    tables_menu->addAction(tr("&Users"));
-
-    QMenu *service_menu = menuBar()->addMenu(tr("&Service"));
-    service_menu->addAction(tr("&Import"));
-
-    QTextEdit *tmp = new QTextEdit(this);
-    setCentralWidget(tmp);
+    ui->tableView->setModel(model);
+    ui->tableView->show();
 }
 
 MainWindow::~MainWindow()
 {
+    delete ui;
 }
 
 void MainWindow::LoadSettings()
